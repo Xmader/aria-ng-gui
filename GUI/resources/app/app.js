@@ -32,7 +32,8 @@ app.on('ready', function () {
     // 打开窗口的调试工具
     mainWindow.webContents.openDevTools();
     mainWindow.setMenu(null);
-    mainWindow.loadURL('file://' + __dirname + '/pages/index.html');
+    //mainWindow.loadURL('file://' + __dirname + '/pages/index.html');
+    mainWindow.loadURL('http://xmader.coding.me/aria-ng/');
 
     mainWindow.once('ready-to-show', function () {
         mainWindow.show()
