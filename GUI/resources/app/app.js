@@ -33,7 +33,7 @@ app.on('ready', function () {
     mainWindow.webContents.openDevTools();
     mainWindow.setMenu(null);
     //mainWindow.loadURL('file://' + __dirname + '/pages/index.html');
-    mainWindow.loadURL('http://xmader.coding.me/aria-ng/');
+    mainWindow.loadURL('https://xmader.coding.me/aria-ng/');
 
     mainWindow.once('ready-to-show', function () {
         mainWindow.show()
