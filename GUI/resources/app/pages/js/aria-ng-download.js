@@ -16,7 +16,7 @@ function show_urls() {
 function show_btn() {
     // 判断是否是 已完成/已停止 页面
     var hash = location.hash.split("/")[1];
-    if (hash == "stopped") {
+    if (hash == "stopped" && enable_file_download == true) {
         // 导航栏增加分割线
         var divider = document.createElement('li');
         divider.classList = ["divider"];
@@ -31,13 +31,13 @@ function show_btn() {
     }
     else {
         $($(".nav.navbar-nav")[0]).children("li#show_urls_btn,li#show_urls_divider").remove();
-        
+
     }
 }
 
 // 判断是否是 已完成/已停止 页面
 var hash = location.hash.split("/")[1];
-if (hash == "stopped") {
+if (hash == "stopped" && enable_file_download == true) {
     show_btn()
 }
 
