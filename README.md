@@ -7,4 +7,4 @@
 
 [查看文档](https://aria-ng.xmader.com/)
 
-[下载](https://aria-ng.xmader.com/README?id=下载)
+[下载](https://aria-ng.xmader.com/#/README?id=下载)
