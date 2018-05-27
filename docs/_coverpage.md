@@ -4,5 +4,5 @@
 
 
 
-[下载](download)
-[查看教程](README)
+[下载](README?id=下载)
+[查看文档](README)
