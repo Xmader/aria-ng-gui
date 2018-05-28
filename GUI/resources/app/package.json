@@ -1,20 +1,12 @@
 {
-  "private": true,
-  "engines": {
-    "node": ">=6"
-  },
-  "name": "ariang-gui",
-  "version": "1.0RC",
-  "description": "AriaNg GUI",
-  "main": "app.js",
-  "scripts": {
-    "postinstall": "install-app-deps",
-    "clean": "rimraf dist",
-    "start": "electron .",
-    "publish:win": "npm run clean && build --ia32",
-    "publish:osx": "npm run clean && build --mac"
-  },
-  "author": "xmader",
-  "homepage": "http://www.xmader.com/"
-  
+    "private": true,
+    "engines": {
+        "node": ">=6"
+    },
+    "name": "ariang-gui",
+    "version": "1.0RC",
+    "description": "AriaNg GUI",
+    "main": "app.js",
+    "author": "xmader",
+    "homepage": "http://www.xmader.com/"
 }
