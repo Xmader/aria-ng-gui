@@ -3,9 +3,9 @@
   "engines": {
     "node": ">=6"
   },
-  "name": "ariang-native",
-  "version": "0.4.0",
-  "description": "AriaNg Native App",
+  "name": "ariang-gui",
+  "version": "1.0RC",
+  "description": "AriaNg GUI",
   "main": "app.js",
   "scripts": {
     "postinstall": "install-app-deps",
