@@ -58,7 +58,7 @@ download_url = "https://www.example.com/"
 
 [Linux版](https://coding.net/u/xmader/p/aria-ng/git/archive/master)
 
-~~Windows版（暂未推出）~~
+[Windows版](https://coding.net/u/xmader/p/aria-ng/git/archive/windows)
 
 ## 特别感谢
 
