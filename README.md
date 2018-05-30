@@ -56,9 +56,9 @@ download_url = "https://www.example.com/"
 
 ## 下载
 
-[Linux版](https://coding.net/u/xmader/p/aria-ng/git/archive/master)
+[Linux版](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Linux.zip)
 
-[Windows版](https://coding.net/u/xmader/p/aria-ng/git/archive/windows)
+[Windows版](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Windows.zip)
 
 ## 特别感谢
 
