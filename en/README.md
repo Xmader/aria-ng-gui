@@ -2,7 +2,7 @@
 
 > An Aria2 GUI for Windows & Linux
 
-![](../Screenshot1.png)
+![](Screenshot1.png)
 
 ## Features
 * Integrate aria2c (Default aria2 RPC: `http://localhost:6800`)
@@ -52,8 +52,8 @@ download_url = "https://www.example.com/"
 ## Screenshots
 
 ![](../Screenshot5.png)
-![](../Screenshot2.png)
-![](../Screenshot3.png)
+![](Screenshot2.png)
+![](Screenshot3.png)
 
 ## Download
 
