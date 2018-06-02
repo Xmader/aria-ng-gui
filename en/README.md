@@ -51,7 +51,7 @@ download_url = "https://www.example.com/"
 
 ## Screenshots
 
-![](../Screenshot5.png)
+![](Screenshot5.png)
 ![](Screenshot2.png)
 ![](Screenshot3.png)
 
