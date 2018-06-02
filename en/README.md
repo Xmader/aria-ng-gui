@@ -5,14 +5,14 @@
 ![](../Screenshot1.png)
 
 ## Features
-* 集成aria2c (默认aria2 RPC:`http://localhost:6800`)
-* 多线程下载
-* 未完成任务退出自动保存
-* 支持PT/BT
+* Integrate aria2c (Default aria2 RPC: `http://localhost:6800`)
+* Multi-Thread Download
+* Auto save unfinished tasks on exit
+* PT/BT support
 * Download finished notification
 * Multi-languages support
 * Multi aria2 RPC host support
-* 支持直接从远程aria2服务器上下载文件
+* Support for downloading files from a remote aria2 server directly
 * Responsive design, supporting desktop and mobile devices
 * User-friendly interface
     * Sort tasks (by name, size, progress, remain time, download speed, etc.), files, peers
@@ -24,11 +24,11 @@
     * Full support of aria2 settings
 
 
-## 使用
+## Usage
 
-解压后双击`aria-ng.exe`或`aria-ng`(Linux版) 即可
+Just Unzip it, and Open `aria-ng.exe` or `aria-ng`(Linux).
 
-默认下载到与`aria-ng.exe`或`aria-ng`(Linux版) 同一文件夹下的 `Download` 文件夹
+By default, `AriaNg GUI` downloads files into `Download` directory.
 
 <!-- ## 高级使用
 
@@ -61,7 +61,7 @@ download_url = "https://www.example.com/"
 
 [Windows](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Windows.zip)
 
-## With special thanks to:
+## With special thanks to
 
 * [Aria2](https://aria2.github.io/)
 * [AriaNg](http://ariang.mayswind.net/zh_Hans/)
