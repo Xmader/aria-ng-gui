@@ -61,6 +61,8 @@ download_url = "https://www.example.com/"
 
 [Windows](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Windows.zip)
 
+[RaspberryPi(Raspbian)](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_RaspberryPi.zip)
+
 ## With special thanks to
 
 * [Aria2](https://aria2.github.io/)

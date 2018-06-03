@@ -60,6 +60,8 @@ download_url = "https://www.example.com/"
 
 [Windows版](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Windows.zip)
 
+[树莓派(Raspbian)版](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_RaspberryPi.zip)
+
 ## 特别感谢
 
 * [Aria2](https://aria2.github.io/)
