@@ -34,7 +34,7 @@ By default, `AriaNg GUI` downloads files into `Download` directory.
 
 ### 文件直接下载
 
-`AriaNg 客户端`支持直接从远程aria2服务器上下载文件，此功能默认关闭。
+`AriaNg GUI`支持直接从远程aria2服务器上下载文件，此功能默认关闭。
 
 #### 启用方法：
 
@@ -64,9 +64,9 @@ download_url = "https://www.example.com/"
 ## With special thanks to
 
 * [Aria2](https://aria2.github.io/)
-* [AriaNg](http://ariang.mayswind.net/zh_Hans/)
+* [AriaNg](http://ariang.mayswind.net/)
 * [Electron](https://electronjs.org/)
-* [docsify](https://docsify.js.org/#/zh-cn/)
+* [docsify](https://docsify.js.org)
 
 
 

@@ -1,6 +1,6 @@
 <img src="AriaNg.png" width="10%" >
 
-# AriaNg 客户端
+# AriaNg GUI
 
 
 

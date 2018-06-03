@@ -1,4 +1,4 @@
-* [AriaNg 客户端](#/README?id=ariang-客户端)
+* [AriaNg GUI](#/README?id=ariang-gui)
 	* [特性](#/README?id=特性)
 	* [使用](#/README?id=使用)
 	* [高级使用](#/README?id=高级使用)

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="UTF-8">
-    <title>AriaNg 客户端</title>
+    <title>AriaNg GUI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.6.10/lib/themes/vue.css">
 </head>
 
@@ -32,7 +32,7 @@
     </div>
     <script>
         window.$docsify = {
-            name: "AriaNg 客户端",
+            name: "AriaNg GUI",
             coverpage: ['/', '/en/'],
             onlyCover: true,
             notFoundPage: {
@@ -78,7 +78,7 @@
                         var f = vm.route.file // 获取url中"#/"后面的部分
                         if (f.split("/")[0] == "en") {
                             footer = footer.replace("超猫", "SuperCat")
-                            document.getElementsByClassName("app-name-link")[0].innerText = "AriaNg GUI"
+                            //document.getElementsByClassName("app-name-link")[0].innerText = "AriaNg GUI"
                         }
 
                         return html + footer
