@@ -1,5 +1,5 @@
 
-# AriaNg 客户端
+# AriaNg GUI
 
 > 一个 Aria2 图形界面客户端
 
