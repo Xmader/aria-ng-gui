@@ -30,7 +30,7 @@ app.on('ready', function () {
 
     var aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
 
-    console.log(aria2_dir)
+    console.log(require("process").cwd())
 
     //打开主程序
     var subpy = require('child_process').spawn(aria2_dir, [`--conf-path=${__dirname}/aria2/aria2.conf`]);
