@@ -1,6 +1,7 @@
 const os = require('os');
 const electron = require('electron');
 const path = require('path');
+const process = require('process')
 
 const edit_conf = require('./edit_conf.js')
 
@@ -8,19 +9,22 @@ const { app, BrowserWindow, Menu, ipcMain } = electron
 
 var mainWindow = null;
 
+// console.dir(process.argv)
+const isDev = process.argv.pop() == "dev";
+
 // 增加右键菜单
 const contextMenuTemplate = [
-    { label: "撤销", role: 'undo' },
+    { label: "撤销", role: 'undo', accelerator: "CmdOrCtrl+Z" },
+    { label: "重做", role: 'redo', accelerator: "CmdOrCtrl+Y" },
     { type: 'separator' }, //分隔线 
-    { label: "剪切", role: 'cut' }, //Cut菜单项
-    { label: "复制", role: 'copy' }, //Copy菜单项
-    { label: "粘贴", role: 'paste' }, //Paste菜单项
-    { label: "删除", role: 'delete' }, //Delete菜单项
+    { label: "剪切", role: 'cut', accelerator: "CmdOrCtrl+X" }, //Cut菜单项
+    { label: "复制", role: 'copy', accelerator: "CmdOrCtrl+C" }, //Copy菜单项
+    { label: "粘贴", role: 'paste', accelerator: "CmdOrCtrl+V" }, //Paste菜单项
+    { label: "删除", role: 'delete', accelerator: "Delete" }, //Delete菜单项
     { type: 'separator' }, //分隔线 
-    { label: "全选", role: 'selectall' }, //Select All菜单项
+    { label: "全选", role: 'selectall', accelerator: "CmdOrCtrl+A" }, //Select All菜单项
 ];
-const dev = false
-if (dev) {
+if (isDev) {
     [
         { type: 'separator' }, //分隔线 
         { label: "重新加载页面", role: 'reload' },
@@ -48,7 +52,7 @@ app.on('ready', function () {
             preload: path.join(__dirname, 'pre.js')
         }
     });
-    
+
     const platform = os.platform();
 
     const aria2_bin = (platform == 'linux' || platform == 'darwin') ? "aria2c" : "aria2c.exe"
