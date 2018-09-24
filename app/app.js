@@ -7,9 +7,6 @@ const edit_conf = require('./edit_conf.js')
 const { app, BrowserWindow, Menu, ipcMain } = electron
 
 var mainWindow = null;
-var platform = os.platform();
-
-var aria2_bin = (platform == 'linux' || platform == 'darwin') ? "aria2c" : "aria2c.exe"
 
 // 增加右键菜单
 const contextMenuTemplate = [
@@ -21,10 +18,15 @@ const contextMenuTemplate = [
     { label: "删除", role: 'delete' }, //Delete菜单项
     { type: 'separator' }, //分隔线 
     { label: "全选", role: 'selectall' }, //Select All菜单项
-    { type: 'separator' }, //分隔线 
-    { label: "重新加载页面", role: 'reload' },
-    { label: "切换开发者工具", role: 'toggledevtools' },
 ];
+const dev = false
+if (dev) {
+    [
+        { type: 'separator' }, //分隔线 
+        { label: "重新加载页面", role: 'reload' },
+        { label: "切换开发者工具", role: 'toggledevtools' },
+    ].forEach(x => contextMenuTemplate.push(x))
+}
 const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
 
 
@@ -46,12 +48,14 @@ app.on('ready', function () {
             preload: path.join(__dirname, 'pre.js')
         }
     });
+    
+    const platform = os.platform();
 
-    let aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
+    const aria2_bin = (platform == 'linux' || platform == 'darwin') ? "aria2c" : "aria2c.exe"
+    const aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
 
-    let conf_path = `${__dirname}/aria2/aria2.conf`
-
-    edit_conf()
+    const conf_path = path.join(__dirname, "aria2", "aria2.conf")
+    edit_conf() // 根据用户的操作系统动态编辑aria2配置文件
 
     //打开主程序
     let subpy = require('child_process').spawn(aria2_dir, [`--conf-path=${conf_path}`]);
