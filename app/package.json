@@ -1,0 +1,13 @@
+{
+    "name": "ariang-gui",
+    "version": "1.1.0",
+    "private": true,
+    "description": "AriaNg GUI",
+    "main": "app.js",
+    "author": "xmader",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Xmader/aria-ng-gui"
+    },
+    "license": "MIT"
+}
