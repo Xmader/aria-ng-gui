@@ -7,7 +7,7 @@ else
 fi
 
 electron-packager . AriaNgGUI \
-    --platform=${platform} --arch=${arch} --electron-version 2.0.10 \
+    --platform=${platform} --arch=${arch} --electron-version 3.0.0 \
     --out ../OutApp/ --overwrite \
     --icon=./assets/AriaNg.ico --ignore=packager.sh \
     --tmpdir=../OutApp/Temp/ --download.cache=../OutApp/Temp/ --download.mirror="https://npm.taobao.org/mirrors/electron/"

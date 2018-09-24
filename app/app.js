@@ -28,7 +28,9 @@ app.on('ready', function () {
         }
     });
 
-    var aria2_dir = `${__dirname}/aria2/${platform}/${aria2_bin}`
+    var aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
+
+    console.log(aria2_dir)
 
     //打开主程序
     var subpy = require('child_process').spawn(aria2_dir, [`--conf-path=${__dirname}/aria2/aria2.conf`]);
