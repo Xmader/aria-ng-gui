@@ -4,12 +4,28 @@ const path = require('path');
 
 const edit_conf = require('./edit_conf.js')
 
-const { app, BrowserWindow } = electron
+const { app, BrowserWindow, Menu, ipcMain } = electron
 
 var mainWindow = null;
 var platform = os.platform();
 
 var aria2_bin = (platform == 'linux' || platform == 'darwin') ? "aria2c" : "aria2c.exe"
+
+// 增加右键菜单
+const contextMenuTemplate = [
+    { label: "撤销", role: 'undo' },
+    { type: 'separator' }, //分隔线 
+    { label: "剪切", role: 'cut' }, //Cut菜单项
+    { label: "复制", role: 'copy' }, //Copy菜单项
+    { label: "粘贴", role: 'paste' }, //Paste菜单项
+    { label: "删除", role: 'delete' }, //Delete菜单项
+    { type: 'separator' }, //分隔线 
+    { label: "全选", role: 'selectall' }, //Select All菜单项
+    { type: 'separator' }, //分隔线 
+    { label: "重新加载页面", role: 'reload' },
+    { label: "切换开发者工具", role: 'toggledevtools' },
+];
+const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
 
 
 app.on('window-all-closed', function () {
@@ -26,7 +42,8 @@ app.on('ready', function () {
         icon: path.join(__dirname, 'assets/AriaNg.png'),
         show: false,
         webPreferences: {
-            nodeIntegration: false
+            nodeIntegration: false,
+            preload: path.join(__dirname, 'pre.js')
         }
     });
 
@@ -54,3 +71,8 @@ app.on('ready', function () {
         mainWindow = null;
     });
 });
+
+ipcMain.on("right_btn", () => {
+    contextMenu.popup(mainWindow);
+})
+
