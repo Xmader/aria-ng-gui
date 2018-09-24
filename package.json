@@ -9,5 +9,9 @@
         "type": "git",
         "url": "https://github.com/Xmader/aria-ng-gui"
     },
+    "scripts": {
+        "start": "electron .",
+        "packager-darwin64": "./packager.sh darwin x64 #只能在*unix系统上运行此打包脚本"
+    },
     "license": "MIT"
 }
