@@ -2,6 +2,8 @@ const os = require('os');
 const electron = require('electron');
 const path = require('path');
 
+const edit_conf = require('./edit_conf.js')
+
 const { app, BrowserWindow } = electron
 
 var mainWindow = null;
@@ -28,12 +30,14 @@ app.on('ready', function () {
         }
     });
 
-    var aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
+    let aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
 
-    console.log(require("process").cwd())
+    let conf_path = `${__dirname}/aria2/aria2.conf`
+
+    edit_conf()
 
     //打开主程序
-    var subpy = require('child_process').spawn(aria2_dir, [`--conf-path=${__dirname}/aria2/aria2.conf`]);
+    let subpy = require('child_process').spawn(aria2_dir, [`--conf-path=${conf_path}`]);
 
     // 打开窗口的调试工具
     //mainWindow.webContents.openDevTools();
