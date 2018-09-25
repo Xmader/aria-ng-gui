@@ -57,11 +57,7 @@ download_url = "https://www.example.com/"
 
 ## Download
 
-[Linux](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Linux.zip)
-
-[Windows](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Windows.zip)
-
-[RaspberryPi(Raspbian)](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_RaspberryPi.zip)
+[Releases](https://github.com/Xmader/aria-ng-gui/releases/latest)
 
 ## With special thanks to
 

@@ -56,11 +56,7 @@ download_url = "https://www.example.com/"
 
 ## 下载
 
-[Linux版](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Linux.zip)
-
-[Windows版](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_Windows.zip)
-
-[树莓派(Raspbian)版](https://xmader.oss-cn-shanghai.aliyuncs.com/AriaNG_GUI_RaspberryPi.zip)
+[Releases](https://github.com/Xmader/aria-ng-gui/releases/latest)
 
 ## 特别感谢
 
@@ -68,8 +64,3 @@ download_url = "https://www.example.com/"
 * [AriaNg](http://ariang.mayswind.net/zh_Hans/)
 * [Electron](https://electronjs.org/)
 * [docsify](https://docsify.js.org/#/zh-cn/)
-
-<!-- ## 作者
-
-[Xmader.com & 超猫](https://www.xmader.com) -->
-

@@ -53,7 +53,6 @@
             externalLinkTarget: '_self', // default: '_blank'
             noCompileLinks: ["#/", "#\/README\?.*","#\/en\/README\?.*"],
             repo: 'https://github.com/Xmader/aria-ng-gui',
-            //repo: 'https://coding.net/u/xmader/p/aria-ng/git?public=true',
             search: {
                 paths: 'auto',
                 placeholder: {
@@ -70,18 +69,11 @@
                     var footer = [
                         '<footer>',
                         '<hr>',
-                        '<a href="https://www.xmader.com/" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">© Xmader.com & 超猫</a>',
+                        '<a href="https://github.com/Xmader" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">Copyright © 2018 Xmader</a>',
                         '</footer>'
                     ].join('')
 
                     hook.afterEach(function (html) {
-
-                        var f = vm.route.file // 获取url中"#/"后面的部分
-                        if (f.split("/")[0] == "en") {
-                            footer = footer.replace("超猫", "SuperCat")
-                            //document.getElementsByClassName("app-name-link")[0].innerText = "AriaNg GUI"
-                        }
-
                         return html + footer
                     })
                 }
