@@ -12,9 +12,10 @@
     "scripts": {
         "dev": "electron . dev",
         "start": "electron .",
-        "build-win64": "git-bash ./packager.sh win32 x64 #只能在windows系统上运行此打包脚本",
+        "build-win32": "sh ./packager.sh win32 ia32",
+        "build-win64": "sh ./packager.sh win32 x64",
         "build-darwin64": "sh ./packager.sh darwin x64 #只能在*unix系统上运行此打包脚本",
-        "build-linux64": "sh ./packager.sh linux x64 #只能在*unix系统上运行此打包脚本",
+        "build-linux64": "sh ./packager.sh linux x64",
         "release": "npm version minor",
         "release-patch": "npm version patch"
     },
