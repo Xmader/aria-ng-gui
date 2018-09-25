@@ -25,6 +25,9 @@ cd "AriaNgGUI-${platform}-${arch}"
 if [ ${platform} = "darwin" ]
 then
     electron-installer-zip AriaNgGUI.app ../../dist/AriaNgGUI-${platform}-${arch}.zip
+elif [ ${platform} = "linux" ]
+then
+    electron-installer-zip AriaNgGUI-${platform}-${arch} ../../dist/AriaNgGUI-${platform}-${arch}.zip
 else
     electron-installer-zip . ../../dist/AriaNgGUI-${platform}-${arch}.zip
 fi
