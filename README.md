@@ -28,7 +28,7 @@
 
 # AriaNg GUI
 
-> An Aria2 GUI for Windows & Linux
+> An Aria2 GUI for Windows & Linux & MacOS
 
 [![Build Status](https://dev.azure.com/xmader/aria-ng-gui/_apis/build/status/aria-ng-gui-darwin)](https://dev.azure.com/xmader/aria-ng-gui/_build/latest?definitionId=1)
 
