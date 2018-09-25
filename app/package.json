@@ -1,6 +1,6 @@
 {
     "name": "ariang-gui",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "private": true,
     "description": "AriaNg GUI",
     "main": "app.js",
@@ -14,8 +14,12 @@
         "start": "electron .",
         "build-win64": "git-bash ./packager.sh win32 x64 #只能在windows系统上运行此打包脚本",
         "build-darwin64": "./packager.sh darwin x64 #只能在*unix系统上运行此打包脚本",
+        "build-linux64": "./packager.sh linux x64 #只能在*unix系统上运行此打包脚本",
         "release": "npm version minor",
         "release-patch": "npm version patch"
+    },
+    "dependencies": {
+        "electron": "^3.0.0"
     },
     "devDependencies": {
         "electron-installer-zip": "^0.1.2",

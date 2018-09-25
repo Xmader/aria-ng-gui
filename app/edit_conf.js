@@ -1,9 +1,10 @@
 const os = require('os');
 const fs = require('fs')
 const path = require('path')
+const { app } = require('electron')
 
 const edit_conf = (conf_path = `${__dirname}/aria2/aria2.conf`) => {
-    const download_dir = path.join(os.homedir(), "Downloads")
+    const download_dir = app.getPath("downloads") || path.join(os.homedir(), "Downloads")
 
     let old_conf = fs.readFileSync(conf_path).toString()
 
