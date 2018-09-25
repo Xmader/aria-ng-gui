@@ -19,9 +19,6 @@
         "release": "npm version minor",
         "release-patch": "npm version patch"
     },
-    "dependencies": {
-        "electron": "^3.0.0"
-    },
     "devDependencies": {
         "electron-installer-zip": "^0.1.2",
         "electron-packager": "^12.1.2"
