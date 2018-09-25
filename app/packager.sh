@@ -20,10 +20,10 @@ cp ../../README.md ./
 cp ../../LICENSE ./
 
 cd ../ # 在OutApp文件夹
-pwd
-ls
-echo "AriaNgGUI-${platform}-${arch}"
-electron-installer-zip AriaNgGUI-${platform}-${arch} ../dist/AriaNgGUI-${platform}-${arch}.zip
+cd "AriaNgGUI-${platform}-${arch}"
+
+electron-installer-zip . ../../dist/AriaNgGUI-${platform}-${arch}.zip
+
 # rm -rf AriaNgGUI-${platform}-${arch}
 
 # rm ../dist/AriaNgGUI-${platform}-${arch}.zip
