@@ -1,6 +1,6 @@
 {
     "name": "ariang-gui",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "private": true,
     "description": "AriaNg GUI",
     "main": "app.js",

@@ -2,6 +2,7 @@ const os = require('os');
 const electron = require('electron');
 const path = require('path');
 const process = require('process')
+const fs = require("fs")
 
 const edit_conf = require('./edit_conf.js')
 
@@ -62,6 +63,7 @@ app.on('ready', function () {
     edit_conf() // 根据用户的操作系统动态编辑aria2配置文件
 
     //打开主程序
+    fs.chmodSync(aria2_dir, 0o777)
     let subpy = require('child_process').spawn(aria2_dir, [`--conf-path=${conf_path}`]);
 
     // 打开窗口的调试工具
