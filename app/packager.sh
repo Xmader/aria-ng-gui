@@ -21,10 +21,13 @@ cp ../../LICENSE ./
 
 cd ../ # 在OutApp文件夹
 cd "AriaNgGUI-${platform}-${arch}"
-pwd
-ls
-rm -rf Temp
-electron-installer-zip . ../../dist/AriaNgGUI-${platform}-${arch}.zip
+
+if [ ${platform} = "darwin" ]
+then
+    electron-installer-zip AriaNgGUI.app ../../dist/AriaNgGUI-${platform}-${arch}.zip
+else
+    electron-installer-zip . ../../dist/AriaNgGUI-${platform}-${arch}.zip
+fi
 
 # rm -rf AriaNgGUI-${platform}-${arch}
 
