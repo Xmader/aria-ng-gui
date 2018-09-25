@@ -1,3 +1,15 @@
+/*!
+ * AriaNg GUI
+ * 
+ * Copyright (c) 2018 Xmader
+ * Released under the MIT license
+ * 
+ * Source Code: https://github.com/Xmader/aria-ng-gui
+ * 
+ * check_update.js - 检查更新
+ * 
+*/
+
 const path = require('path');
 const { dialog, shell, app } = require('electron').remote
 

@@ -1,3 +1,13 @@
+/*!
+ * AriaNg GUI
+ * 
+ * Copyright (c) 2018 Xmader
+ * Released under the MIT license
+ * 
+ * Source Code: https://github.com/Xmader/aria-ng-gui
+ * 
+*/
+
 const os = require('os');
 const electron = require('electron');
 const path = require('path');
@@ -60,7 +70,7 @@ app.on('ready', function () {
     const aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
 
     const conf_path = path.join(__dirname, "aria2", "aria2.conf")
-    edit_conf() // 根据用户的操作系统动态编辑aria2配置文件
+    edit_conf() // 根据用户的操作系统动态编辑aria2的配置文件
 
     //打开主程序
     fs.chmodSync(aria2_dir, 0o777)

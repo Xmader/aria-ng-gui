@@ -1,3 +1,15 @@
+/*!
+ * AriaNg GUI
+ * 
+ * Copyright (c) 2018 Xmader
+ * Released under the MIT license
+ * 
+ * Source Code: https://github.com/Xmader/aria-ng-gui
+ * 
+ * edit_conf.js - 根据用户的操作系统动态编辑aria2的配置文件
+ * 
+*/
+
 const os = require('os');
 const fs = require('fs')
 const path = require('path')
