@@ -3,8 +3,6 @@
 
 > 一个 Aria2 图形界面客户端
 
-[![构建状态](https://dev.azure.com/xmader/aria-ng-gui/_apis/build/status/aria-ng-gui-darwin)](https://dev.azure.com/xmader/aria-ng-gui/_build/latest?definitionId=1)
-
 ![](https://aria-ng.xmader.com/Screenshot1.png)
 
 ## 特性
@@ -29,8 +27,6 @@
 # AriaNg GUI
 
 > An Aria2 GUI for Windows & Linux & MacOS
-
-[![Build Status](https://dev.azure.com/xmader/aria-ng-gui/_apis/build/status/aria-ng-gui-darwin)](https://dev.azure.com/xmader/aria-ng-gui/_build/latest?definitionId=1)
 
 ![](https://aria-ng.xmader.com/en/Screenshot1.png)
 
