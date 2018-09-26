@@ -50,9 +50,25 @@ window.show_file = show_file
 const file_exists = (path) => fs.existsSync(path)
 window.file_exists = file_exists
 
-// 显示AriaNg GUI的版本号
+const show_progress_bar = () => { // 显示任务栏进度条
+    if (!window.aria2TaskService) return
+
+    window.aria2TaskService.getTaskList("downloading", false, (response) => {
+        let tasks = response.data
+
+        let total_progress = tasks.reduce((total, task) => total + (task.completedLength / task.totalLength), 0)
+
+        let progress = (tasks.length > 0) ? (total_progress / tasks.length) : -1
+        ipcRenderer.send('show_progress_bar', progress)
+    })
+}
+
 window.onload = () => {
+    // 显示AriaNg GUI的版本号
     const version = app.getVersion()
     let logo = document.getElementById("aria-ng-logo")
     logo.title = `AriaNg GUI v${version} | ${logo.title}`
+
+    // 显示任务栏进度条
+    setInterval(show_progress_bar, 200)
 }

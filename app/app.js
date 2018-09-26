@@ -97,3 +97,6 @@ ipcMain.on("right_btn", () => {
     contextMenu.popup(mainWindow);
 })
 
+ipcMain.on("show_progress_bar", (event, n) => {
+    mainWindow.setProgressBar(n ? n : -1)
+})
