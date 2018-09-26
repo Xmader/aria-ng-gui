@@ -11,12 +11,12 @@
 
 * 集成aria2c
 * 多线程下载
-* 未完成任务退出自动保存
+* 未完成任务退出自动保存 <!-- (Bug: 需要暂停才能保存进度) -->
 * 支持PT/BT
 * 下载完成消息通知
 * 多语言支持
 * 支持配置多个 aria2 RPC
-* 支持直接从远程aria2服务器上下载文件
+* 支持打开下载文件夹, 在文件管理器中显示已下载的文件 (仅限使用内置的Aria2 RPC)
 * 使用响应式布局, 支持各种计算机或移动设备
 * 友好的界面交互
 
@@ -43,7 +43,7 @@
 * Download finished notification
 * Multi-languages support
 * Multi aria2 RPC host support
-* Support for downloading files from a remote aria2 server directly
+* Support for opening download folder, and displaying downloaded files in file manager (the built-in Aria2 RPC only)
 * Responsive design, supporting desktop and mobile devices
 * User-friendly interface
 

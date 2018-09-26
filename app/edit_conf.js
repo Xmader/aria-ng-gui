@@ -15,23 +15,16 @@ const fs = require('fs')
 const path = require('path')
 const { app } = require('electron')
 
-const edit_conf = (conf_path = `${__dirname}/aria2/aria2.conf`) => {
-    const download_dir = app.getPath("downloads") || path.join(os.homedir(), "Downloads")
+const download_dir = app.getPath("downloads") || path.join(os.homedir(), "Downloads")
+
+const edit_conf = (conf_path) => {
+    const session_path = path.join(path.dirname(conf_path), "aria2.session")
 
     let old_conf = fs.readFileSync(conf_path).toString()
 
-    let old_conf_list = old_conf.split("\r\n")
-    if (old_conf_list.length == 1) {
-        old_conf_list = old_conf.split("\n")
-    }
-
-    let new_conf_list = old_conf_list.map(x => {
-        if (x.startsWith("input-file=") || x.startsWith("save-session=")) return "# " + x
-        else if (x.startsWith("dir=")) return "dir=" + download_dir
-        else return x
-    })
-
-    let new_conf = new_conf_list.join("\n")
+    let new_conf = old_conf
+        .replace(/dir=.+/, "dir=" + download_dir)
+        .replace(/(input-file=|save-session=).*/g, "$1" + session_path)
 
     fs.writeFileSync(conf_path, new_conf)
 }
