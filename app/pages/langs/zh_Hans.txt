@@ -227,6 +227,7 @@ Tap to configure and get started with AriaNg.=您还没有进行过设置, 点�
 Cannot initialize WebSocket!=无法初始化 WebSocket!
 Access Denied!=拒绝访问!
 You cannot use AriaNg because this browser does not support data storage.=您无法使用 AriaNg, 您的浏览器不支持数据存储.
+Show the file in a file manager=在文件管理器中显示文件
 
 [error]
 unknown=未知错误.
@@ -259,6 +260,7 @@ option.bad=设置错误.
 server.overload=远程服务器繁忙, 无法处理当前请求.
 rpc.request.parse.failed=处理 RPC 请求失败.
 checksum.failed=文件校验失败.
+file.deleted=文件已被移动或删除
 
 [format]
 longdate=YYYY年MM月DD日 HH:mm:ss

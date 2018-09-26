@@ -26,12 +26,11 @@ const isDev = process.argv.pop() == "dev";
 // 增加右键菜单
 const contextMenuTemplate = [
     { label: "撤销", role: 'undo', accelerator: "CmdOrCtrl+Z" },
-    { label: "重做", role: 'redo', accelerator: "CmdOrCtrl+Y" },
+    { label: "恢复", role: 'redo', accelerator: "CmdOrCtrl+Y" },
     { type: 'separator' }, //分隔线 
     { label: "剪切", role: 'cut', accelerator: "CmdOrCtrl+X" }, //Cut菜单项
     { label: "复制", role: 'copy', accelerator: "CmdOrCtrl+C" }, //Copy菜单项
     { label: "粘贴", role: 'paste', accelerator: "CmdOrCtrl+V" }, //Paste菜单项
-    { label: "删除", role: 'delete', accelerator: "Delete" }, //Delete菜单项
     { type: 'separator' }, //分隔线 
     { label: "全选", role: 'selectall', accelerator: "CmdOrCtrl+A" }, //Select All菜单项
 ];
@@ -44,6 +43,8 @@ if (isDev) {
 }
 const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
 
+
+app.commandLine.appendSwitch('ignore-certificate-errors') // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
 app.on('window-all-closed', function () {
     app.quit();
