@@ -136,6 +136,7 @@ Tips: You can use the "noprefix" tag to ignore the prefix, "nosuffix" tag ignore
 Example: ${downspeed:noprefix:nosuffix:scale\=1}=示例: ${downspeed:noprefix:nosuffix:scale\=1}
 Page Title Refresh Interval=页面标题刷新间隔
 Enable Browser Notification=启用浏览器通知
+Enable Desktop Notification=启用桌面通知
 Aria2 RPC Alias=Aria2 RPC 别名
 Aria2 RPC Address=Aria2 RPC 地址
 Aria2 RPC Protocol=Aria2 RPC 协议
@@ -169,7 +170,7 @@ Are you sure you want to import all settings?=您是否要导入所有设置?
 Invalid settings data format!=无效的设置数据格式!
 Data has been copied to clipboard.=数据已经复制到剪贴板中.
 Supported Placeholder=支持的占位符
-AriaNg Title=AriaNg 标题
+AriaNg Title=AriaNg GUI 标题
 Downloading Count=正在下载数量
 Waiting Count=正在等待数量
 Stopped Count=已停止数量

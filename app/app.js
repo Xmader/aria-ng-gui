@@ -57,7 +57,7 @@ app.on('ready', function () {
         height: 600,
         minWidth: 400,
         minHeight: 400,
-        icon: path.join(__dirname, 'assets/AriaNg.png'),
+        icon: path.join(__dirname, 'assets', 'AriaNg.png'),
         show: false,
         webPreferences: {
             nodeIntegration: false,
@@ -98,5 +98,7 @@ ipcMain.on("right_btn", () => {
 })
 
 ipcMain.on("show_progress_bar", (event, n) => {
-    mainWindow.setProgressBar(n ? n : -1)
+    if (mainWindow && mainWindow.setProgressBar) {
+        mainWindow.setProgressBar(n ? n : -1)
+    }
 })

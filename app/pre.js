@@ -12,20 +12,25 @@
 
 const fs = require("fs")
 const { resolve } = require("path")
-const { ipcRenderer, shell, remote: { app } } = require('electron');
-const check_update = require('./check_update.js')
+const { ipcRenderer, shell, remote: { app } } = require("electron")
+
+const check_update = require("./check_update.js")
+const notify = require("./notify.js")
+
+// 支持桌面提醒
+window.notify = notify
 
 // 添加右键菜单
-window.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
+window.addEventListener("contextmenu", (e) => {
+    e.preventDefault()
 
     let activeElement = document.activeElement
     let tagName = activeElement.tagName.toLocaleLowerCase()
 
     if (tagName == "input" || tagName == "textarea") {
-        ipcRenderer.send('right_btn');
+        ipcRenderer.send("right_btn")
     }
-});
+})
 
 // 检查版本更新
 check_update()
@@ -59,7 +64,7 @@ const show_progress_bar = () => { // 显示任务栏进度条
         let total_progress = tasks.reduce((total, task) => total + (task.completedLength / task.totalLength), 0)
 
         let progress = (tasks.length > 0) ? (total_progress / tasks.length) : -1
-        ipcRenderer.send('show_progress_bar', progress)
+        ipcRenderer.send("show_progress_bar", progress)
     })
 }
 
