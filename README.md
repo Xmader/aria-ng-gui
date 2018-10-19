@@ -3,7 +3,7 @@
 
 > 一个 Aria2 图形界面客户端
 
-[![构建状态](https://dev.azure.com/xmader/aria-ng-gui/_apis/build/status/aria-ng-gui-darwin)](https://dev.azure.com/xmader/aria-ng-gui/_build/latest?definitionId=1)
+[![构建状态](https://dev.azure.com/xmader/apps/_apis/build/status/aria-ng-gui)](https://dev.azure.com/xmader/apps/_build/latest?definitionId=1)
 
 ![](https://aria-ng.xmader.com/Screenshot1.png)
 
