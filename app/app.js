@@ -8,40 +8,40 @@
  * 
 */
 
-const os = require('os');
-const path = require('path');
+const os = require("os")
+const path = require("path")
 const fs = require("fs")
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require("electron")
 
-const edit_conf = require('./edit_conf.js')
-const { buildMenu } = require('./menu.js')
+const edit_conf = require("./edit_conf.js")
+const { buildMenu } = require("./menu.js")
 
 let mainWindow = null
 
-app.commandLine.appendSwitch('ignore-certificate-errors') // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
+app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
-app.on('window-all-closed', function () {
-    app.quit();
-});
+app.on("window-all-closed", function () {
+    app.quit()
+})
 
-app.on('ready', function () {
+app.on("ready", function () {
     mainWindow = new BrowserWindow({
-        title: 'AriaNg',
+        title: "AriaNg",
         width: 1000,
         height: 600,
         minWidth: 400,
         minHeight: 400,
-        icon: path.join(__dirname, 'assets', 'AriaNg.png'),
+        icon: path.join(__dirname, "assets", "AriaNg.png"),
         show: false,
         webPreferences: {
             nodeIntegration: false,
-            preload: path.join(__dirname, 'pre.js')
+            preload: path.join(__dirname, "pre.js")
         }
-    });
+    })
 
-    const platform = os.platform();
+    const platform = os.platform()
 
-    const aria2_bin = (platform == 'linux' || platform == 'darwin') ? "aria2c" : "aria2c.exe"
+    const aria2_bin = (platform == "linux" || platform == "darwin") ? "aria2c" : "aria2c.exe"
     const aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
 
     const conf_path = path.join(__dirname, "aria2", "aria2.conf")
@@ -49,35 +49,35 @@ app.on('ready', function () {
 
     //打开主程序
     fs.chmodSync(aria2_dir, 0o777)
-    let subpy = require('child_process').spawn(aria2_dir, [`--conf-path=${conf_path}`]);
+    let subpy = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`])
 
     // 打开窗口的调试工具
-    //mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools()
 
     const locale = app.getLocale().includes("zh") ? "zh-CN" : "en-US"
     const { contextMenu, appMenu } = buildMenu(locale)
 
-    if (platform == 'darwin') {
+    if (platform == "darwin") {
         Menu.setApplicationMenu(appMenu)
     } else {
         mainWindow.setMenu(null)
     }
 
-    mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/pages/index.html`)
 
-    mainWindow.once('ready-to-show', function () {
+    mainWindow.once("ready-to-show", function () {
         mainWindow.show()
-    });
+    })
 
-    mainWindow.on('closed', function () {
-        subpy.kill('SIGINT');
-        mainWindow = null;
-    });
+    mainWindow.on("closed", function () {
+        subpy.kill("SIGINT")
+        mainWindow = null
+    })
 
     ipcMain.on("right_btn", () => {
         contextMenu.popup(mainWindow)
     })
-});
+})
 
 ipcMain.on("show_progress_bar", (event, n) => {
     if (mainWindow && mainWindow.setProgressBar) {
