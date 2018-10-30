@@ -18,9 +18,8 @@ const edit_conf = require('./edit_conf.js')
 
 const { app, BrowserWindow, Menu, ipcMain } = electron
 
-var mainWindow = null;
+let mainWindow = null;
 
-// console.dir(process.argv)
 const isDev = process.argv.pop() == "dev";
 
 // 增加右键菜单
@@ -42,6 +41,16 @@ if (isDev) {
     ].forEach(x => contextMenuTemplate.push(x))
 }
 const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
+
+const appMenuTemplate = [
+    {
+        submenu: [{ label: "退出", role: "quit" }]
+    },
+    {
+        label: "编辑",
+        submenu: contextMenuTemplate
+    }
+]
 
 
 app.commandLine.appendSwitch('ignore-certificate-errors') // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
@@ -80,7 +89,12 @@ app.on('ready', function () {
     // 打开窗口的调试工具
     //mainWindow.webContents.openDevTools();
 
-    mainWindow.setMenu(null);
+    if (platform == 'darwin') {
+        Menu.setApplicationMenu(Menu.buildFromTemplate(appMenuTemplate))
+    } else {
+        mainWindow.setMenu(null)
+    }
+
     mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
 
     mainWindow.once('ready-to-show', function () {
