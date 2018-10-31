@@ -11,7 +11,7 @@
 */
 
 const fs = require("fs")
-const { resolve } = require("path")
+const { resolve, join } = require("path")
 const { ipcRenderer, shell, remote: { app } } = require("electron")
 
 const check_update = require("./check_update.js")
@@ -67,6 +67,24 @@ const show_progress_bar = () => { // 显示任务栏进度条
         ipcRenderer.send("show_progress_bar", progress)
     })
 }
+
+// 保存设置到aria2.conf文件
+const saveLocalConfig = (options) => {
+    const conf_path = join(__dirname, "aria2", "aria2.conf")
+    let conf = fs.readFileSync(conf_path).toString()
+
+    Object.entries(options).forEach(([key, value]) => {
+        conf = conf.replace(
+            new RegExp(`(${key}=).+`),
+            "$1" + value
+        )
+    })
+
+    fs.writeFileSync(conf_path, conf)
+}
+
+window.saveLocalConfig = saveLocalConfig
+
 
 window.onload = () => {
     // 显示AriaNg GUI的版本号
