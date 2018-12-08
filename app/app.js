@@ -54,7 +54,12 @@ app.on("ready", function () {
 
 	function runAria2 () {
 		killAria2();
-		subpy = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`])
+		subpy = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`], {
+			stdio: 'pipe'
+		})
+        subpy.stdout.pipe(process.stdout, { end: false })
+        subpy.stderr.pipe(process.stderr, { end: false })
+
 		subpy.on('error', runAria2);
 		subpy.on('exit', runAria2);
 	}
