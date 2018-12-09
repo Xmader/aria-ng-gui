@@ -21,6 +21,7 @@ const translations = {
     "切换开发者工具": "Toggle Developer Tools",
     "退出": "Quit",
     "编辑": "Edit",
+    "显示窗口": "Display Window",
 }
 
 const Translate = (menuTemplate, locale = "en-US") => {

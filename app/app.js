@@ -15,8 +15,11 @@ const { app, BrowserWindow, Menu, ipcMain } = require("electron")
 
 const edit_conf = require("./edit_conf.js")
 const { buildMenu } = require("./menu.js")
+const { displayTray } = require("./tray.js")
 
 let mainWindow = null
+
+const icon = path.join(__dirname, "assets", "AriaNg.png")
 
 app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
@@ -31,7 +34,7 @@ app.on("ready", function () {
         height: 600,
         minWidth: 400,
         minHeight: 400,
-        icon: path.join(__dirname, "assets", "AriaNg.png"),
+        icon,
         show: false,
         webPreferences: {
             nodeIntegration: false,
@@ -92,6 +95,12 @@ app.on("ready", function () {
 
     mainWindow.once("ready-to-show", function () {
         mainWindow.show()
+    })
+
+    mainWindow.on("close", function (e) {
+        e.preventDefault()
+        mainWindow.hide()
+        displayTray(icon)
     })
 
     mainWindow.on("closed", function () {
