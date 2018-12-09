@@ -36,7 +36,7 @@ const edit_conf = (conf_path) => {
 
     let new_conf = old_conf
         .replace(/^dir=.*$/m, "dir=" + download_dir)
-        .replace(/^(input-file=|save-session=).*$/g, "$1" + session_path)
+        .replace(/^(input-file=|save-session=).*$/gm, "$1" + session_path)
 
     fs.writeFileSync(conf_path, new_conf)
 }
