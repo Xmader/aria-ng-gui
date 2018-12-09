@@ -49,7 +49,32 @@ app.on("ready", function () {
 
     //打开主程序
     fs.chmodSync(aria2_dir, 0o777)
-    let subpy = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`])
+
+    let subpy = null
+
+    function runAria2() {
+        killAria2()
+
+        subpy = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`], {
+            stdio: "pipe"
+        })
+        subpy.stdout.pipe(process.stdout, { end: false })
+        subpy.stderr.pipe(process.stderr, { end: false })
+
+        subpy.on("error", runAria2)
+        subpy.on("exit", runAria2)
+    }
+
+    function killAria2() {
+        if (subpy) {
+            subpy.removeAllListeners("error")
+            subpy.removeAllListeners("exit")
+            subpy.kill("SIGINT")
+            subpy = null
+        }
+    }
+
+    runAria2()
 
     // 打开窗口的调试工具
     //mainWindow.webContents.openDevTools()
@@ -70,7 +95,7 @@ app.on("ready", function () {
     })
 
     mainWindow.on("closed", function () {
-        subpy.kill("SIGINT")
+        killAria2()
         mainWindow = null
     })
 

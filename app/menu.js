@@ -25,7 +25,7 @@ const contextMenuTemplate = [
     { label: "粘贴", role: "paste", accelerator: "CmdOrCtrl+V" }, //Paste菜单项
     { type: "separator" }, //分隔线 
     { label: "全选", role: "selectall", accelerator: "CmdOrCtrl+A" }, //Select All菜单项
-];
+]
 if (isDev) {
     [
         { type: "separator" }, //分隔线 
