@@ -9,6 +9,7 @@
 */
 
 const { app, Tray, BrowserWindow } = require("electron")
+const { dialog } = require("electron")
 
 let tray = null
 let trayMenu = null
@@ -24,6 +25,24 @@ const displayTray = (icon) => {
     tray = new Tray(icon)
     tray.setToolTip("AriaNg GUI v" + app.getVersion())
     tray.setContextMenu(trayMenu || getTrayMenu())
+
+    const title = "AriaNg GUI 已最小化到托盘"
+    const content = "可以右键单击托盘图标完全退出"
+    if (process.platform == "win32") {
+        tray.displayBalloon({
+            icon,
+            title,
+            content
+        })
+    } else {
+        dialog.showMessageBox({
+            type: "info",
+            icon,
+            title: "AriaNg GUI",
+            message: title,
+            detail: content
+        })
+    }
 }
 
 const destroyTray = () => {
