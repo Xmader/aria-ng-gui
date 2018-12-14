@@ -12,7 +12,7 @@
 * Download finished notification
 * Multi-languages support
 * Multi aria2 RPC host support
-* Support for downloading files from a remote aria2 server directly
+* Support for opening download folder, and displaying downloaded files in file manager (the built-in Aria2 RPC only)
 * Responsive design, supporting desktop and mobile devices
 * User-friendly interface
     * Sort tasks (by name, size, progress, remain time, download speed, etc.), files, peers
@@ -26,28 +26,9 @@
 
 ## Usage
 
-Just Unzip it, and Open `aria-ng.exe` or `aria-ng`(Linux).
+Just Unzip it, and Run.
 
-By default, `AriaNg GUI` downloads files into `Download` directory.
-
-<!-- ## 高级使用
-
-### 文件直接下载
-
-`AriaNg GUI`支持直接从远程aria2服务器上下载文件，此功能默认关闭。
-
-#### 启用方法：
-
-修改`GUI/resources/app/pages/js/`文件夹下的`download-url-setting.js`文件，将`false`修改为`true`,并在引号内写上直接下载地址。
-
-例如：
-```js
-// 是否启用文件直接下载
-enable_file_download = true
-
-// 请在这里写下您的文件直接下载地址
-download_url = "https://www.example.com/"
-``` -->
+By default, `AriaNg GUI` downloads files into user's `Download` directory.
 
 ## Screenshots
 
