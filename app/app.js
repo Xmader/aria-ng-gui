@@ -11,11 +11,11 @@
 const os = require("os")
 const path = require("path")
 const fs = require("fs")
-const { app, BrowserWindow, Menu, ipcMain } = require("electron")
+const { app, BrowserWindow, Menu, ipcMain, shell } = require("electron")
 
 const edit_conf = require("./edit_conf.js")
 const { buildMenu } = require("./menu.js")
-const { displayTray } = require("./tray.js")
+const { displayTray, destroyTray } = require("./tray.js")
 
 let mainWindow = null
 
@@ -28,6 +28,13 @@ app.on("window-all-closed", function () {
 })
 
 app.on("ready", function () {
+
+    // 只允许运行单一实例 (进程)
+    const gotTheLock = app.requestSingleInstanceLock()
+    if (!gotTheLock) {
+        return app.quit()
+    }
+
     mainWindow = new BrowserWindow({
         title: "AriaNg",
         width: 1000,
@@ -111,6 +118,14 @@ app.on("ready", function () {
     ipcMain.on("right_btn", () => {
         contextMenu.popup(mainWindow)
     })
+})
+
+app.on("second-instance", function () {
+    destroyTray()
+    if (mainWindow) {
+        mainWindow.focus()
+        shell.beep()
+    }
 })
 
 ipcMain.on("show_progress_bar", (event, n) => {

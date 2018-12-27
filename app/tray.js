@@ -59,6 +59,8 @@ const displayTray = async (icon) => {
 }
 
 const destroyTray = () => {
+    if (!tray) return
+
     const mainWindow = BrowserWindow.getAllWindows()[0]
 
     tray.destroy()
