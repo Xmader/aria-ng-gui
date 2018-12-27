@@ -86,6 +86,15 @@ const saveLocalConfig = (options) => {
 window.saveLocalConfig = saveLocalConfig
 
 
+// 获取是否禁用了最小化时的通知
+ipcRenderer.on("isMinimizeNotificationDisabled", () => {
+    const options = localStorage.getItem("AriaNg.Options")
+    const disabled = options && JSON.parse(options).minimizeNotification == false
+
+    ipcRenderer.send("minimizeNotificationDisabled", disabled)
+})
+
+
 window.onload = () => {
     // 显示AriaNg GUI的版本号
     const version = app.getVersion()

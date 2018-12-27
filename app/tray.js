@@ -8,7 +8,7 @@
  * 
 */
 
-const { app, Tray, BrowserWindow } = require("electron")
+const { app, Tray, BrowserWindow, ipcMain } = require("electron")
 const { dialog } = require("electron")
 
 let tray = null
@@ -21,27 +21,40 @@ const getTrayMenu = () => {
     return _trayMenu
 }
 
-const displayTray = (icon) => {
+const displayTray = async (icon) => {
     tray = new Tray(icon)
     tray.setToolTip("AriaNg GUI v" + app.getVersion())
     tray.setContextMenu(trayMenu || getTrayMenu())
 
-    const title = "AriaNg GUI 已最小化到托盘"
-    const content = "可以右键单击托盘图标完全退出"
-    if (process.platform == "win32") {
-        tray.displayBalloon({
-            icon,
-            title,
-            content
+    const minimizeNotificationDisabled = await new Promise((resolve) => {
+        const mainWindow = BrowserWindow.getAllWindows()[0]
+
+        ipcMain.once("minimizeNotificationDisabled", (e, value) => {
+            resolve(value)
         })
-    } else {
-        dialog.showMessageBox({
-            type: "info",
-            icon,
-            title: "AriaNg GUI",
-            message: title,
-            detail: content
-        })
+
+        mainWindow.webContents.send("isMinimizeNotificationDisabled")
+    })
+
+
+    if (!minimizeNotificationDisabled) {
+        const title = "AriaNg GUI 已最小化到托盘"
+        const content = "可以右键单击托盘图标完全退出"
+        if (process.platform == "win32") {
+            tray.displayBalloon({
+                icon,
+                title,
+                content
+            })
+        } else {
+            dialog.showMessageBox({
+                type: "info",
+                icon,
+                title: "AriaNg GUI",
+                message: title,
+                detail: content
+            })
+        }
     }
 }
 

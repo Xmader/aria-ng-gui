@@ -137,6 +137,7 @@ Example: ${downspeed:noprefix:nosuffix:scale\=1}=示例: ${downspeed:noprefix:no
 Page Title Refresh Interval=页面标题刷新间隔
 Enable Browser Notification=启用浏览器通知
 Enable Desktop Notification=启用桌面通知
+Enable Minimize Notification=启用最小化通知
 Aria2 RPC Alias=Aria2 RPC 别名
 Aria2 RPC Address=Aria2 RPC 地址
 Aria2 RPC Protocol=Aria2 RPC 协议
