@@ -75,7 +75,7 @@ const saveLocalConfig = (options) => {
 
     Object.entries(options).forEach(([key, value]) => {
         conf = conf.replace(
-            new RegExp(`(${key}=).+`),
+            new RegExp(`(${key}=).*`),
             "$1" + value
         )
     })
