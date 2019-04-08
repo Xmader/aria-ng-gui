@@ -12,6 +12,7 @@
 
 const fs = require("fs")
 const { resolve, join } = require("path")
+const { EOL } = require("os")
 const { ipcRenderer, shell, remote: { app } } = require("electron")
 
 const check_update = require("./check_update.js")
@@ -74,10 +75,15 @@ const saveLocalConfig = (options) => {
     let conf = fs.readFileSync(conf_path).toString()
 
     Object.entries(options).forEach(([key, value]) => {
-        conf = conf.replace(
-            new RegExp(`(${key}=).*`),
-            "$1" + value
-        )
+        const r = new RegExp(`^(?:#\\s*)?(${key}=).*`, "m")
+        if (r.test(conf)) {
+            conf = conf.replace(
+                r,
+                "$1" + value
+            )
+        } else {
+            conf += `${EOL}${key}=${value}`
+        }
     })
 
     fs.writeFileSync(conf_path, conf)
