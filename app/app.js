@@ -20,6 +20,7 @@ const { displayTray, destroyTray } = require("./tray.js")
 let mainWindow = null
 
 const icon = path.join(__dirname, "assets", "AriaNg.png")
+const trayIcon = path.join(__dirname, "assets", "tray-icon.png")
 
 app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
@@ -107,7 +108,7 @@ app.on("ready", function () {
     mainWindow.on("close", function (e) {
         e.preventDefault()
         mainWindow.hide()
-        displayTray(icon)
+        displayTray(trayIcon)
     })
 
     mainWindow.on("closed", function () {

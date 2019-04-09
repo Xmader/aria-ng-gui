@@ -23,7 +23,7 @@ const edit_conf = (conf_path) => {
     let old_conf = fs.readFileSync(conf_path).toString()
 
     let download_dir = default_download_dir
-    let saved_dir = (old_conf.match(/^dir=(.*)$/m) || ["", ""])[1]
+    let saved_dir = (old_conf.match(/^dir=(.*)$/m) || [])[1]
     if (saved_dir) {
         let stat = null
         try {
