@@ -27,7 +27,7 @@ const translations = {
 const Translate = (menuTemplate, locale = "en-US") => {
     const _translateLabels = (x) => {
         if (x.label) {
-            x.label = translations[x.label]
+            x.label = translations[x.label] || x.label
         }
         if (x.submenu) {
             x.submenu = x.submenu.map(_translateLabels)
