@@ -8,7 +8,7 @@ fi
 
 ignore_platform=$(node -e "console.log(['linux','darwin','win32'].filter(x=>x!='${platform}').join('|'))")
 
-electron-packager . AriaNgGUI --app-copyright="Copyright (c) 2018 Xmader" \
+electron-packager . AriaNgGUI --app-copyright="Copyright (c) 2018-2019 Xmader" \
     --platform=${platform} --arch=${arch} --electron-version 3.0.0 \
     --out ../OutApp/ --overwrite \
     --icon=./assets/AriaNg.ico --ignore=packager.sh --ignore="aria2\/(${ignore_platform})" --ignore="^\/node_modules" \
