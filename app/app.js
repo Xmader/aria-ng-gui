@@ -30,8 +30,12 @@ const moveFileSync = (src, dest) => {
 
 const moveConfigFileSync = (src, dest) => {
     // 优雅升级，迁移旧版本的配置文件
-    if (fs.existsSync(src) && !fs.existsSync(dest)) {
-        moveFileSync(src, dest)
+    if (fs.existsSync(src)) {
+        if (!fs.existsSync(dest)) {
+            moveFileSync(src, dest)
+        } else {
+            fs.unlinkSync(src)
+        }
     }
 }
 
