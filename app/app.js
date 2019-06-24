@@ -89,27 +89,27 @@ app.on("ready", function () {
     //打开主程序
     fs.chmodSync(aria2_dir, 0o777)
 
-    let subpy = null
+    let aria2c = null
 
     function runAria2() {
         killAria2()
 
-        subpy = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`], {
+        aria2c = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`], {
             stdio: "pipe"
         })
-        subpy.stdout.pipe(process.stdout, { end: false })
-        subpy.stderr.pipe(process.stderr, { end: false })
+        aria2c.stdout.pipe(process.stdout, { end: false })
+        aria2c.stderr.pipe(process.stderr, { end: false })
 
-        subpy.on("error", runAria2)
-        subpy.on("exit", runAria2)
+        aria2c.on("error", runAria2)
+        aria2c.on("exit", runAria2)
     }
 
     function killAria2() {
-        if (subpy) {
-            subpy.removeAllListeners("error")
-            subpy.removeAllListeners("exit")
-            subpy.kill("SIGINT")
-            subpy = null
+        if (aria2c) {
+            aria2c.removeAllListeners("error")
+            aria2c.removeAllListeners("exit")
+            aria2c.kill("SIGINT")
+            aria2c = null
         }
     }
 
@@ -139,10 +139,14 @@ app.on("ready", function () {
         displayTray(trayIcon)
     })
 
-    mainWindow.on("closed", function () {
+    const onClosed = () => {
         killAria2()
         mainWindow = null
-    })
+    }
+
+    mainWindow.on("closed", onClosed)
+    process.on("SIGINT", onClosed)
+    process.on("SIGTERM", onClosed)
 
     ipcMain.on("right_btn", () => {
         contextMenu.popup(mainWindow)
