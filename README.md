@@ -27,7 +27,7 @@
 ## 使用 npm 安装
 
 ```
-npm i aria-ng-gui
+npm i -g aria-ng-gui
 ```
 
 运行
@@ -66,7 +66,7 @@ AriaNgGUI
 ## Install using npm
 
 ```
-npm i aria-ng-gui
+npm i -g aria-ng-gui
 ```
 
 run
