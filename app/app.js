@@ -28,6 +28,13 @@ const moveFileSync = (src, dest) => {
     fs.unlinkSync(src)
 }
 
+const moveConfigFileSync = (src, dest) => {
+    // 优雅升级，迁移旧版本的配置文件
+    if (fs.existsSync(src) && !fs.existsSync(dest)) {
+        moveFileSync(src, dest)
+    }
+}
+
 app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
 app.on("window-all-closed", function () {
@@ -70,13 +77,8 @@ app.on("ready", function () {
     const session_path = path.join(base_path, "aria2.session")
 
     // 优雅升级，迁移旧版本的配置文件
-    if (fs.existsSync(conf_path_old) && !fs.existsSync(conf_path)) {
-        moveFileSync(conf_path_old, conf_path)
-    }
-
-    if (fs.existsSync(session_path_old) && !fs.existsSync(session_path)) {
-        moveFileSync(session_path_old, session_path)
-    }
+    moveConfigFileSync(conf_path_old, conf_path)
+    moveConfigFileSync(session_path_old, session_path)
 
     edit_conf(conf_path) // 根据用户的操作系统动态编辑aria2的配置文件
 
