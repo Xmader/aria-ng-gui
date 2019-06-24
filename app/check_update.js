@@ -42,12 +42,9 @@ const check_update = async () => {
     const data = await req.json()
 
     const version = app.getVersion() // 当前版本号, 在package.json中定义
-    const version_formatted = format_version(version)
-
     const new_version = data["version"]
-    const new_version_formatted = format_version(new_version)
 
-    if (version_formatted < new_version_formatted) {
+    if (compare_versions(new_version, version) >= 1) {
         found_new_version(version, new_version)
     }
 }
@@ -56,7 +53,29 @@ const check_update = async () => {
  * @param {string} e - 需要被格式化的版本号字符串
  */
 const format_version = (e) => {
-    return e.split(".").map((e) => +e)
+    return e.split(".").map((e) => +e | 0)
+}
+
+/**
+ * @param {string} a 
+ * @param {string} b 
+ */
+const compare_versions = (a, b) => {
+    const av = format_version(a)
+    const bv = format_version(b)
+
+    for (let i = 0; i < Math.max(av.length, bv.length); i++) {
+        const an = +av[i]
+        const bn = +bv[i]
+
+        if (an > bn) {
+            return 1
+        } else if (bn > an) {
+            return -1
+        }
+    }
+
+    return 0
 }
 
 module.exports = check_update
