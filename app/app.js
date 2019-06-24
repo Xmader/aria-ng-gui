@@ -22,6 +22,12 @@ let mainWindow = null
 const icon = path.join(__dirname, "assets", "AriaNg.png")
 const trayIcon = path.join(__dirname, "assets", "tray-icon.png")
 
+const moveFileSync = (src, dest) => {
+    // fs.rename() 不能跨驱动器移动文件
+    fs.copyFileSync(src, dest)
+    fs.unlinkSync(src)
+}
+
 app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
 app.on("window-all-closed", function () {
@@ -55,7 +61,23 @@ app.on("ready", function () {
     const aria2_bin = (platform == "linux" || platform == "darwin") ? "aria2c" : "aria2c.exe"
     const aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
 
-    const conf_path = path.join(__dirname, "aria2", "aria2.conf")
+    const base_path_old = path.join(__dirname, "aria2")
+    const conf_path_old = path.join(base_path_old, "aria2.conf")
+    const session_path_old = path.join(base_path_old, "aria2.session")
+
+    const base_path = app.getPath("userData")
+    const conf_path = path.join(base_path, "aria2.conf")
+    const session_path = path.join(base_path, "aria2.session")
+
+    // 优雅升级，迁移旧版本的配置文件
+    if (fs.existsSync(conf_path_old) && !fs.existsSync(conf_path)) {
+        moveFileSync(conf_path_old, conf_path)
+    }
+
+    if (fs.existsSync(session_path_old) && !fs.existsSync(session_path)) {
+        moveFileSync(session_path_old, session_path)
+    }
+
     edit_conf(conf_path) // 根据用户的操作系统动态编辑aria2的配置文件
 
     //打开主程序

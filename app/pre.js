@@ -71,7 +71,7 @@ const show_progress_bar = () => { // 显示任务栏进度条
 
 // 保存设置到aria2.conf文件
 const saveLocalConfig = (options) => {
-    const conf_path = join(__dirname, "aria2", "aria2.conf")
+    const conf_path = join(app.getPath("userData"), "aria2.conf")
     let conf = fs.readFileSync(conf_path).toString()
 
     Object.entries(options).forEach(([key, value]) => {

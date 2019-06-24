@@ -20,6 +20,10 @@ const default_download_dir = app.getPath("downloads") || path.join(os.homedir(),
 const edit_conf = (conf_path) => {
     const session_path = path.join(path.dirname(conf_path), "aria2.session")
 
+    if (!fs.existsSync(session_path)) {
+        fs.writeFileSync(session_path, "")
+    }
+
     let old_conf = fs.readFileSync(conf_path).toString()
 
     let download_dir = default_download_dir
