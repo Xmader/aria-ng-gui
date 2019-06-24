@@ -24,6 +24,18 @@
 
 ## [下载](https://github.com/Xmader/aria-ng-gui/releases/latest)
 
+## 使用 npm 安装
+
+```
+npm i aria-ng-gui
+```
+
+运行
+
+```
+AriaNgGUI
+```
+
 ---
 
 # AriaNg GUI
@@ -50,3 +62,15 @@
 ## [Docs](https://aria-ng.xmader.com/#/en/README)
 
 ## [Download](https://github.com/Xmader/aria-ng-gui/releases/latest)
+
+## Install using npm
+
+```
+npm i aria-ng-gui
+```
+
+run
+
+```
+AriaNgGUI
+```
