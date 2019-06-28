@@ -42,6 +42,12 @@ npm i -g aria-ng-gui
 AriaNgGUI
 ```
 
+更新
+
+```
+npm update -g aria-ng-gui
+```
+
 ---
 
 # AriaNg GUI
@@ -85,4 +91,10 @@ run
 
 ```
 AriaNgGUI
+```
+
+update
+
+```
+npm update -g aria-ng-gui
 ```
