@@ -48,6 +48,15 @@ AriaNgGUI
 npm update -g aria-ng-gui
 ```
 
+## 使用 scoop 安装
+
+[Scoop](https://github.com/lukesampson/scoop) 是一个 Windows 下的包管理工具。
+
+```
+scoop bucket add extras
+scoop install aria-ng-gui
+```
+
 ---
 
 # AriaNg GUI
@@ -97,4 +106,13 @@ update
 
 ```
 npm update -g aria-ng-gui
+```
+
+## Install using scoop
+
+[Scoop](https://github.com/lukesampson/scoop) is a command-line installer for Windows.
+
+```
+scoop bucket add extras
+scoop install aria-ng-gui
 ```
