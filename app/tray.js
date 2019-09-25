@@ -26,6 +26,10 @@ const displayTray = async (icon) => {
     tray.setToolTip("AriaNg GUI v" + app.getVersion())
     tray.setContextMenu(trayMenu || getTrayMenu())
 
+    tray.on("click", () => {
+        destroyTray()
+    })
+
     const minimizeNotificationDisabled = await new Promise((resolve) => {
         const mainWindow = BrowserWindow.getAllWindows()[0]
 
