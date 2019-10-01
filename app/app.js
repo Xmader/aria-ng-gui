@@ -41,11 +41,11 @@ const moveConfigFileSync = (src, dest) => {
 
 app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
-app.on("window-all-closed", function () {
+app.on("window-all-closed", () => {
     app.quit()
 })
 
-app.on("ready", function () {
+app.on("ready", () => {
 
     // 只允许运行单一实例 (进程)
     const gotTheLock = app.requestSingleInstanceLock()
@@ -129,11 +129,11 @@ app.on("ready", function () {
 
     mainWindow.loadURL(`file://${__dirname}/pages/index.html`)
 
-    mainWindow.once("ready-to-show", function () {
+    mainWindow.once("ready-to-show", () => {
         mainWindow.show()
     })
 
-    mainWindow.on("close", function (e) {
+    mainWindow.on("close", (e) => {
         e.preventDefault()
         mainWindow.hide()
         displayTray(trayIcon)
@@ -153,7 +153,7 @@ app.on("ready", function () {
     })
 })
 
-app.on("second-instance", function () {
+app.on("second-instance", () => {
     destroyTray()
     if (mainWindow) {
         mainWindow.focus()
