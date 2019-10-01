@@ -8,7 +8,6 @@
  * 
 */
 
-const os = require("os")
 const { app, Tray, BrowserWindow, ipcMain, dialog, Notification } = require("electron")
 
 let tray = null
@@ -31,7 +30,7 @@ const displayTray = async (icon, trayIcon) => {
     })
 
     // MacOS
-    if (os.platform() == "darwin") {
+    if (process.platform == "darwin") {
         app.dock.hide()
     }
 
@@ -80,17 +79,17 @@ const destroyTray = () => {
     const mainWindow = BrowserWindow.getAllWindows()[0]
 
     // MacOS
-    if (os.platform() == "darwin") {
+    if (process.platform == "darwin") {
         app.dock.show()
     }
 
-    mainWindow.show()
-
-    // MacOS & Linux workaround
+    // cross-platform workaround
     // issues: Xmader/aria-ng-gui#20 Xmader/aria-ng-gui#22 Xmader/aria-ng-gui#24
     mainWindow.once("show", () => {
         tray.destroy()
     })
+
+    mainWindow.show()
 }
 
 const destroyMainWindow = () => {
