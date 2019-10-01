@@ -8,6 +8,7 @@
  * 
 */
 
+const os = require("os")
 const { app, Tray, BrowserWindow, ipcMain, dialog, Notification } = require("electron")
 
 let tray = null
@@ -30,7 +31,9 @@ const displayTray = async (icon, trayIcon) => {
     })
 
     // MacOS
-    app.dock.hide()
+    if (os.platform() == "darwin") {
+        app.dock.hide()
+    }
 
     const minimizeNotificationDisabled = await new Promise((resolve) => {
         const mainWindow = BrowserWindow.getAllWindows()[0]
@@ -54,9 +57,9 @@ const displayTray = async (icon, trayIcon) => {
             })
         } else if (Notification.isSupported()) {
             new Notification({
+                icon,
                 title,
                 body: content,
-                icon,
             }).show()
         } else {
             dialog.showMessageBox({
@@ -76,7 +79,9 @@ const destroyTray = () => {
     const mainWindow = BrowserWindow.getAllWindows()[0]
 
     // MacOS
-    app.dock.show()
+    if (os.platform() == "darwin") {
+        app.dock.show()
+    }
 
     mainWindow.show()
 
