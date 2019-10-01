@@ -49,18 +49,19 @@ const displayTray = async (icon, trayIcon) => {
     if (!minimizeNotificationDisabled) {
         const title = "AriaNg GUI 已最小化到托盘"
         const content = "可以右键单击托盘图标完全退出"
-        if (process.platform == "win32") {
-            tray.displayBalloon({
-                icon,
-                title,
-                content,
-            })
-        } else if (Notification.isSupported()) {
+        if (Notification.isSupported()) {
             new Notification({
                 icon,
                 title,
                 body: content,
             }).show()
+        } else if (process.platform == "win32") {
+            // Windows only
+            tray.displayBalloon({
+                icon,
+                title,
+                content,
+            })
         } else {
             dialog.showMessageBox({
                 type: "info",
