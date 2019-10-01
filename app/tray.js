@@ -8,8 +8,7 @@
  * 
 */
 
-const { app, Tray, BrowserWindow, ipcMain } = require("electron")
-const { dialog } = require("electron")
+const { app, Tray, BrowserWindow, ipcMain, dialog, Notification } = require("electron")
 
 let tray = null
 let trayMenu = null
@@ -21,8 +20,8 @@ const getTrayMenu = () => {
     return _trayMenu
 }
 
-const displayTray = async (icon) => {
-    tray = new Tray(icon)
+const displayTray = async (icon, trayIcon) => {
+    tray = new Tray(trayIcon)
     tray.setToolTip("AriaNg GUI v" + app.getVersion())
     tray.setContextMenu(trayMenu || getTrayMenu())
 
@@ -51,8 +50,14 @@ const displayTray = async (icon) => {
             tray.displayBalloon({
                 icon,
                 title,
-                content
+                content,
             })
+        } else if (Notification.isSupported()) {
+            new Notification({
+                title,
+                body: content,
+                icon,
+            }).show()
         } else {
             dialog.showMessageBox({
                 type: "info",

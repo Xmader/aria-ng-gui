@@ -136,7 +136,7 @@ app.on("ready", () => {
     mainWindow.on("close", (e) => {
         e.preventDefault()
         mainWindow.hide()
-        displayTray(trayIcon)
+        displayTray(icon, trayIcon)
     })
 
     const onClosed = () => {
