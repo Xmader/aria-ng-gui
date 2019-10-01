@@ -30,6 +30,9 @@ const displayTray = async (icon) => {
         destroyTray()
     })
 
+    // MacOS
+    app.dock.hide()
+
     const minimizeNotificationDisabled = await new Promise((resolve) => {
         const mainWindow = BrowserWindow.getAllWindows()[0]
 
@@ -67,8 +70,16 @@ const destroyTray = () => {
 
     const mainWindow = BrowserWindow.getAllWindows()[0]
 
-    tray.destroy()
+    // MacOS
+    app.dock.show()
+
     mainWindow.show()
+
+    // MacOS & Linux workaround
+    // issues: Xmader/aria-ng-gui#20 Xmader/aria-ng-gui#22 Xmader/aria-ng-gui#24
+    mainWindow.once("show", () => {
+        tray.destroy()
+    })
 }
 
 const destroyMainWindow = () => {
