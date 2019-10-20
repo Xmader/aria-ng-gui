@@ -47,7 +47,7 @@ const displayTray = async (icon, trayIcon) => {
 
     if (!minimizeNotificationDisabled) {
         const title = "AriaNg GUI 已最小化到托盘"
-        const content = "可以右键单击托盘图标完全退出"
+        const content = "可以通过托盘图标菜单完全退出"
         if (Notification.isSupported()) {
             new Notification({
                 icon,
