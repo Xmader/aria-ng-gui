@@ -33,13 +33,19 @@ const displayTray = async (icon, trayIcon) => {
         icon = nativeImage.createFromPath(icon)
     }
 
-    tray = new Tray(trayIcon)
-    tray.setToolTip("AriaNg GUI v" + app.getVersion())
-    tray.setContextMenu(trayMenu || getTrayMenu())
+    if (tray && tray.isDestroyed()) {
+        tray = null
+    }
 
-    tray.on("click", () => {
-        destroyTray()
-    })
+    if (!tray) {
+        tray = new Tray(trayIcon)
+        tray.setToolTip("AriaNg GUI v" + app.getVersion())
+        tray.setContextMenu(trayMenu || getTrayMenu())
+
+        tray.on("click", () => {
+            destroyTray()
+        })
+    }
 
     // MacOS
     if (process.platform == "darwin") {
@@ -98,7 +104,16 @@ const destroyTray = () => {
     // cross-platform workaround
     // issues: Xmader/aria-ng-gui#20 Xmader/aria-ng-gui#22 Xmader/aria-ng-gui#24
     mainWindow.once("show", () => {
-        tray.destroy()
+        // 暂时绕过 Xmader/aria-ng-gui#24
+        // 临时的 workaround for KDE and GNOME, 直到找到更好的解决办法
+        // 在 Linux 上显示窗口后不删除托盘图标
+        if (process.platform != "linux") {
+            tray.destroy()
+        }
+
+        if (tray.isDestroyed()) {
+            tray = null
+        }
     })
 
     mainWindow.show()
