@@ -106,7 +106,7 @@ const destroyTray = () => {
     mainWindow.once("show", () => {
         // 暂时绕过 Xmader/aria-ng-gui#24
         // 临时的 workaround for KDE and GNOME, 直到找到更好的解决办法
-        // 在 Linux 上显示窗口后不删除托盘图标
+        // 在 Linux 上显示窗口后不移除托盘图标
         if (process.platform != "linux") {
             tray.destroy()
         }
