@@ -7,11 +7,12 @@ else
 fi
 
 ignore_platform=$(node -e "console.log(['linux','darwin','win32'].filter(x=>x!='${platform}').join('|'))")
+ignore_arch=$(node -e "console.log(['x64','ia32','arm64','armv7l'].filter(x=>x!='${arch}').join('|'))")
 
 electron-packager . AriaNgGUI --app-copyright="Copyright (c) 2018-2019 Xmader" \
     --platform=${platform} --arch=${arch} --electron-version 7.1.1 \
     --out ../OutApp/ --overwrite \
-    --icon=./assets/AriaNg.ico --ignore=packager.sh --ignore="aria2\/(${ignore_platform})" --ignore="^\/node_modules" \
+    --icon=./assets/AriaNg.ico --ignore=packager.sh --ignore="aria2\/(${ignore_platform})" --ignore="aria2\/${platform}/(${ignore_arch})" --ignore="^\/node_modules" \
     --tmpdir=../OutApp/Temp/ --download.cache=../OutApp/Temp/
 
 cd ../OutApp/AriaNgGUI-${platform}-${arch}

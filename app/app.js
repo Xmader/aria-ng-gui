@@ -50,6 +50,15 @@ const moveConfigFileSync = (src, dest) => {
     }
 }
 
+/**
+ * @param {string} p 
+ */
+const findFirstSubdirName = (p) => {
+    return fs.readdirSync(p, { withFileTypes: true })
+        .find((x) => x.isDirectory())
+        .name
+}
+
 app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关错误, 适用于使用自签名证书将Aria2的RPC配置成HTTPS协议的情况
 
 app.on("window-all-closed", () => {
@@ -79,9 +88,34 @@ app.on("ready", () => {
     })
 
     const platform = os.platform()
+    const arch = os.arch()
 
-    const aria2_bin = (platform == "linux" || platform == "darwin") ? "aria2c" : "aria2c.exe"
-    const aria2_dir = path.join(__dirname, "aria2", platform, aria2_bin)
+    /**
+     * @param {NodeJS.Platform} _platform
+     * @param {"arm"| "arm64"| "ia32"| "mips"| "mipsel"| "ppc"| "ppc64"| "s390"| "s390x"| "x32"| "x64" | string} _arch
+     * @returns {string}
+     */
+    const getAria2cPath = (_platform, _arch) => {
+        if (_arch == "x32") {
+            _arch = "ia32"
+        }
+
+        const aria2Dir = path.join(__dirname, "aria2")
+        const p = path.join(aria2Dir, _platform, _arch, aria2c_bin)
+
+        if (!fs.existsSync(p)) {
+            // find existed aria2c
+            const _platform = findFirstSubdirName(aria2Dir)
+            const platformDir = path.join(aria2Dir, _platform)
+            const _arch = findFirstSubdirName(platformDir)
+            return path.join(platformDir, _arch, aria2c_bin)
+        } else {
+            return p
+        }
+    }
+
+    const aria2c_bin = (platform == "linux" || platform == "darwin") ? "aria2c" : "aria2c.exe"
+    const aria2c_path = getAria2cPath(platform, arch)
 
     const base_path_old = path.join(__dirname, "aria2")
     const conf_path_old = path.join(base_path_old, "aria2.conf")
@@ -98,7 +132,7 @@ app.on("ready", () => {
     edit_conf(conf_path) // 根据用户的操作系统动态编辑aria2的配置文件
 
     //打开主程序
-    fs.chmodSync(aria2_dir, 0o777)
+    fs.chmodSync(aria2c_path, 0o777)
 
     /** @type {import("child_process").ChildProcessWithoutNullStreams} */
     let aria2c = null
@@ -106,7 +140,7 @@ app.on("ready", () => {
     function runAria2() {
         killAria2()
 
-        aria2c = require("child_process").spawn(aria2_dir, [`--conf-path=${conf_path}`], {
+        aria2c = require("child_process").spawn(aria2c_path, [`--conf-path=${conf_path}`], {
             stdio: "pipe"
         })
         aria2c.stdout.pipe(process.stdout, { end: false })
