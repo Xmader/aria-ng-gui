@@ -8,6 +8,8 @@
  * 
 */
 
+// @ts-check
+
 const os = require("os")
 const path = require("path")
 const fs = require("fs")
@@ -17,17 +19,26 @@ const edit_conf = require("./edit_conf.js")
 const { buildMenu } = require("./menu.js")
 const { displayTray, destroyTray } = require("./tray.js")
 
+/** @type {Electron.BrowserWindow} */
 let mainWindow = null
 
 const icon = path.join(__dirname, "assets", "AriaNg.png")
 const trayIcon = path.join(__dirname, "assets", "tray-icon.png")
 
+/**
+ * @param {string} src
+ * @param {string} dest
+ */
 const moveFileSync = (src, dest) => {
     // fs.rename() 不能跨驱动器移动文件
     fs.copyFileSync(src, dest)
     fs.unlinkSync(src)
 }
 
+/**
+ * @param {string} src
+ * @param {string} dest
+ */
 const moveConfigFileSync = (src, dest) => {
     // 优雅升级，迁移旧版本的配置文件
     if (fs.existsSync(src)) {
@@ -89,6 +100,7 @@ app.on("ready", () => {
     //打开主程序
     fs.chmodSync(aria2_dir, 0o777)
 
+    /** @type {import("child_process").ChildProcessWithoutNullStreams} */
     let aria2c = null
 
     function runAria2() {
@@ -124,6 +136,7 @@ app.on("ready", () => {
     if (platform == "darwin") {
         Menu.setApplicationMenu(appMenu)
     } else {
+        Menu.setApplicationMenu(null)
         mainWindow.setMenu(null)
     }
 
@@ -149,7 +162,7 @@ app.on("ready", () => {
     process.on("SIGTERM", onClosed)
 
     ipcMain.on("right_btn", () => {
-        contextMenu.popup(mainWindow)
+        contextMenu.popup({ window: mainWindow })
     })
 })
 

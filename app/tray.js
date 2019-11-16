@@ -8,9 +8,13 @@
  * 
 */
 
-const { app, Tray, BrowserWindow, ipcMain, dialog, Notification } = require("electron")
+// @ts-check
 
+const { app, Tray, BrowserWindow, ipcMain, dialog, Notification, nativeImage } = require("electron")
+
+/** @type {Electron.Tray} */
 let tray = null
+/** @type {Electron.Menu} */
 let trayMenu = null
 
 const getTrayMenu = () => {
@@ -20,7 +24,15 @@ const getTrayMenu = () => {
     return _trayMenu
 }
 
+/**
+ * @param {string | Electron.NativeImage} icon
+ * @param {string | Electron.NativeImage} trayIcon
+ */
 const displayTray = async (icon, trayIcon) => {
+    if (typeof icon == "string") {
+        icon = nativeImage.createFromPath(icon)
+    }
+
     tray = new Tray(trayIcon)
     tray.setToolTip("AriaNg GUI v" + app.getVersion())
     tray.setContextMenu(trayMenu || getTrayMenu())

@@ -24,9 +24,12 @@
         "release": "npm version minor",
         "release-patch": "npm version patch"
     },
+    "peerDependencies": {
+        "electron": "^7.1.1"
+    },
     "devDependencies": {
         "electron-installer-zip": "^0.1.2",
-        "electron-packager": "^12.1.2"
+        "electron-packager": "^14.1.0"
     },
     "license": "MIT"
 }

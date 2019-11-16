@@ -10,6 +10,8 @@
  * 
 */
 
+// @ts-check
+
 const translations = {
     "撤销": "Undo",
     "恢复": "Redo",
@@ -24,7 +26,18 @@ const translations = {
     "显示窗口": "Display Window",
 }
 
+/**
+ * @param {import("./menu").MenuTemplate} menuTemplate 
+ * @param {"zh-CN" | "en-US"} locale 
+ */
 const Translate = (menuTemplate, locale = "en-US") => {
+    if (locale != "en-US") {
+        return menuTemplate
+    }
+
+    /**
+     * @param {import("./menu").MenuTemplateItem} x 
+     */
     const _translateLabels = (x) => {
         if (x.label) {
             x.label = translations[x.label] || x.label

@@ -10,6 +10,8 @@
  * 
 */
 
+// @ts-check
+
 const fs = require("fs")
 const { resolve, join } = require("path")
 const { EOL } = require("os")
@@ -19,7 +21,7 @@ const check_update = require("./check_update.js")
 const notify = require("./notify.js")
 
 // 支持桌面提醒
-window.notify = notify
+window["notify"] = notify
 
 // 添加右键菜单
 window.addEventListener("contextmenu", (e) => {
@@ -42,7 +44,7 @@ const open_download_dir = (dir) => {
     shell.beep()
 }
 
-window.open_download_dir = open_download_dir
+window["open_download_dir"] = open_download_dir
 
 // 在文件管理器中显示文件
 const show_file = (path) => {
@@ -50,16 +52,16 @@ const show_file = (path) => {
     shell.beep()
 }
 
-window.show_file = show_file
+window["show_file"] = show_file
 
 // 检测文件或目录是否已被移动或删除
 const file_exists = (path) => fs.existsSync(path)
-window.file_exists = file_exists
+window["file_exists"] = file_exists
 
 const show_progress_bar = () => { // 显示任务栏进度条
-    if (!window.aria2TaskService) return
+    if (!window["aria2TaskService"]) return
 
-    window.aria2TaskService.getTaskList("downloading", false, (response) => {
+    window["aria2TaskService"].getTaskList("downloading", false, (response) => {
         let tasks = response.data
 
         let total_progress = tasks.reduce((total, task) => total + (task.completedLength / task.totalLength), 0)
@@ -89,7 +91,7 @@ const saveLocalConfig = (options) => {
     fs.writeFileSync(conf_path, conf)
 }
 
-window.saveLocalConfig = saveLocalConfig
+window["saveLocalConfig"] = saveLocalConfig
 
 
 // 获取是否禁用了最小化时的通知

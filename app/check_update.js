@@ -10,8 +10,10 @@
  * 
 */
 
+// @ts-check
+
 const path = require("path")
-const { dialog, shell, app } = require("electron").remote
+const { dialog, shell, app, nativeImage } = require("electron").remote
 
 const versionCheckApi = "https://raw.githubusercontent.com/Xmader/aria-ng-gui/master/app/package.json"
 const DownloadUrl = "https://github.com/Xmader/aria-ng-gui/releases/latest"
@@ -20,8 +22,10 @@ const DownloadUrl = "https://github.com/Xmader/aria-ng-gui/releases/latest"
  * @param {string} version
  * @param {string} new_version
  */
-const found_new_version = (version, new_version) => {
-    dialog.showMessageBox({
+const found_new_version = async (version, new_version) => {
+    const icon = nativeImage.createFromPath(path.join(__dirname, "assets/AriaNg.png"))
+
+    const { response } = await dialog.showMessageBox({
         type: "question",
         buttons: ["下载", "取消"],
         defaultId: 0,
@@ -29,12 +33,12 @@ const found_new_version = (version, new_version) => {
         title: "发现新版本!",
         message: "是否要下载新版本?",
         detail: `当前版本: v${version} ,\n新版本: v${new_version} `,
-        icon: path.join(__dirname, "assets/AriaNg.png"),
-    }, (response) => {
-        if (response == 0) {
-            shell.openExternal(DownloadUrl)
-        }
+        icon,
     })
+
+    if (response == 0) {
+        shell.openExternal(DownloadUrl)
+    }
 }
 
 const check_update = async () => {
