@@ -25,6 +25,7 @@ cd "AriaNgGUI-${platform}-${arch}"
 
 if [ ${platform} = "darwin" ]
 then
+    rm -rf Electron.dSYM
     electron-installer-zip AriaNgGUI.app ../../dist/AriaNgGUI-${platform}-${arch}.zip
 elif [ ${platform} = "linux" ]
 then
