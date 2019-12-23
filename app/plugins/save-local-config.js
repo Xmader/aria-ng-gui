@@ -11,8 +11,11 @@
 
 // @ts-check
 
-const { remote: { app } } = require("electron")
+const { remote: { app, require: remoteRequire } } = require("electron")
 const { EOL } = require("os")
+
+/** @type {import("../conf")} */
+const { syncConfigFiles } = remoteRequire("./conf.js")
 
 /**
  * @typedef {import("./index").Plugin} Plugin
@@ -46,6 +49,8 @@ module.exports = {
             })
 
             await fs.writeFile(conf_path, conf)
+
+            syncConfigFiles()
 
         })
 

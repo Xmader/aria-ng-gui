@@ -18,37 +18,13 @@ const { app, BrowserWindow, Menu, ipcMain, shell } = require("electron")
 const edit_conf = require("./edit_conf.js")
 const { buildMenu } = require("./menu.js")
 const { displayTray, destroyTray } = require("./tray.js")
+const { syncConfigFiles, confPath } = require("./conf.js")
 
 /** @type {Electron.BrowserWindow} */
 let mainWindow = null
 
 const icon = path.join(__dirname, "assets", "AriaNg.png")
 const trayIcon = path.join(__dirname, "assets", "tray-icon.png")
-
-/**
- * @param {string} src
- * @param {string} dest
- */
-const moveFileSync = (src, dest) => {
-    // fs.rename() 不能跨驱动器移动文件
-    fs.copyFileSync(src, dest)
-    fs.unlinkSync(src)
-}
-
-/**
- * @param {string} src
- * @param {string} dest
- */
-const moveConfigFileSync = (src, dest) => {
-    // 优雅升级，迁移旧版本的配置文件
-    if (fs.existsSync(src)) {
-        if (!fs.existsSync(dest)) {
-            moveFileSync(src, dest)
-        } else {
-            fs.unlinkSync(src)
-        }
-    }
-}
 
 /**
  * @param {string} p 
@@ -63,6 +39,10 @@ app.commandLine.appendSwitch("ignore-certificate-errors") // 忽略证书相关�
 
 app.on("window-all-closed", () => {
     app.quit()
+})
+
+app.on("quit", () => {
+    syncConfigFiles()
 })
 
 app.on("ready", () => {
@@ -117,19 +97,11 @@ app.on("ready", () => {
     const aria2c_bin = (platform == "linux" || platform == "darwin") ? "aria2c" : "aria2c.exe"
     const aria2c_path = getAria2cPath(platform, arch)
 
-    const base_path_old = path.join(__dirname, "aria2")
-    const conf_path_old = path.join(base_path_old, "aria2.conf")
-    const session_path_old = path.join(base_path_old, "aria2.session")
+    // 将配置文件保存在两处，方便升级和在电脑之间迁移，实际只使用保存在 userData (AppData) 下的配置文件
+    // 同步 在程序目录 和 在 userData (AppData) 下的 配置文件
+    syncConfigFiles()
 
-    const base_path = app.getPath("userData")
-    const conf_path = path.join(base_path, "aria2.conf")
-    const session_path = path.join(base_path, "aria2.session")
-
-    // 优雅升级，迁移旧版本的配置文件
-    moveConfigFileSync(conf_path_old, conf_path)
-    moveConfigFileSync(session_path_old, session_path)
-
-    edit_conf(conf_path) // 根据用户的操作系统动态编辑aria2的配置文件
+    edit_conf(confPath) // 根据用户的操作系统动态编辑aria2的配置文件
 
     //打开主程序
     fs.chmodSync(aria2c_path, 0o777)
@@ -140,7 +112,7 @@ app.on("ready", () => {
     function runAria2() {
         killAria2()
 
-        aria2c = require("child_process").spawn(aria2c_path, [`--conf-path=${conf_path}`], {
+        aria2c = require("child_process").spawn(aria2c_path, [`--conf-path=${confPath}`], {
             stdio: "pipe"
         })
         aria2c.stdout.pipe(process.stdout, { end: false })
