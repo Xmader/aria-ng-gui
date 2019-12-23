@@ -19,6 +19,7 @@ const plugins = [
     require("./progress-bar"),
     require("./save-local-config"),
     require("./notification"),
+    require("./trackers"),
 ]
 
 module.exports = plugins
