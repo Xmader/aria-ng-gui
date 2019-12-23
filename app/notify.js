@@ -3,7 +3,11 @@
 const path = require("path")
 
 const { notifier } = require("./native_node_modules")
-const { Notification } = require("electron")
+
+let { Notification } = require("electron")
+if (typeof Notification == "undefined") {
+    Notification = require("electron").remote.Notification
+}
 
 /**
  * @param {string} title 

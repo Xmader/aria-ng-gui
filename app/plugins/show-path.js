@@ -13,6 +13,7 @@
 
 const { resolve } = require("path")
 const { shell } = require("electron")
+const { existsSync } = require("fs")
 
 /**
  * @typedef {import("./index").Plugin} Plugin
@@ -22,21 +23,21 @@ module.exports = {
     activate(context) {
 
         // 打开下载路径
-        context.addListener("request-open-download-dir", (dir) => {
+        context.extra.openDir = (dir) => {
             shell.openItem(resolve(dir))
             shell.beep()
-        })
+        }
 
         // 在文件管理器中显示文件
-        context.addListener("request-show-file", (path) => {
+        context.extra.showFile = (path) => {
             shell.showItemInFolder(resolve(path))
             shell.beep()
-        })
+        }
 
         // 检测文件或目录是否已被移动或删除
-        context.addListener("request-if-file-exists", (path) => {
-            return context.fs.exists(path)
-        })
+        context.extra.fileExists = context.extra.fileExistsSync = (path) => {
+            return existsSync(path)
+        }
 
     }
 }
