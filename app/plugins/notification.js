@@ -11,7 +11,8 @@
 
 // @ts-check
 
-const notify = require("../notify.js")
+/** @type {import("../notify")} */
+const notify = require("electron").remote.require("./notify.js")
 
 /**
  * @typedef {import("./index").Plugin} Plugin
