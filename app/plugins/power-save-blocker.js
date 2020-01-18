@@ -48,7 +48,6 @@ const blocker = new PowerSaveBlocker()
  */
 module.exports = {
     activate(context) {
-
         context.addListener("downloading", (tasks) => {
             const isDownloading = tasks.length > 0
             if (isDownloading) {
@@ -57,6 +56,8 @@ module.exports = {
                 blocker.stop()
             }
         })
-
+    },
+    deactivate() {
+        blocker.stop()
     }
 }
