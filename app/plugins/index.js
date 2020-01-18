@@ -20,6 +20,7 @@ const plugins = [
     require("./save-local-config"),
     require("./notification"),
     require("./trackers"),
+    require("./power-save-blocker"),
 ]
 
 module.exports = plugins
