@@ -1,7 +1,7 @@
 /*!
  * AriaNg GUI
  * 
- * Copyright (c) 2018-2019 Xmader
+ * Copyright (c) 2018-2020 Xmader
  * Released under the MIT license
  * 
  * Source Code: https://github.com/Xmader/aria-ng-gui
